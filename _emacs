@@ -135,4 +135,4 @@
 (add-to-list 'load-path "~/elisp/magit-1.0.0")
 (require 'magit)
 (global-set-key "\C-xg" 'magit-status)
-;;
+;;;xxoo;
