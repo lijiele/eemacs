@@ -135,7 +135,6 @@
 (add-to-list 'load-path "~/elisp/magit-1.0.0")
 (require 'magit)
 (global-set-key "\C-xg" 'magit-status)
-;;
 
 ;;config for paredit
 (autoload 'paredit-mode "paredit"
@@ -151,3 +150,4 @@
   (interactive "DDirectory: ")
   (eshell-command 
    (format "find %s -type f -name \"*.*\" | xargs etags --append" dir-name)))
+
