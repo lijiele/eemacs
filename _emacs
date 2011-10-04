@@ -44,7 +44,7 @@
 (color-theme-initialize)
 (if window-system
     ;;    (color-theme-hober))
-    (color-theme-billw))
+    (color-theme-charcoal-black))
                                         ;(your-config-name)
 (set-face-attribute 'default nil :height 100)
 (menu-bar-mode 0)
@@ -151,3 +151,9 @@
   (eshell-command 
    (format "find %s -type f -name \"*.*\" | xargs etags --append" dir-name)))
 
+;;
+(require 'org-install)
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)

@@ -1,7 +1,7 @@
 (setq user-mail-address "lijiele__dev@163.com")
 (setq user-full-name "Li Ji")
 
-;;(setq gnus-select-method '(nntp ""))
+(setq gnus-select-method '(nntp ""))
 
 (setq gnus-secondary-select-methods '((nnml ""))
        mail-sources '((pop :server "pop.163.com"
