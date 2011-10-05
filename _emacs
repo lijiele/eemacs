@@ -1,5 +1,5 @@
 (setq standard-indent 2)
-(setq-default indent-tabs-mode nil) 
+(setq-default indent-tabs-mode nil)
 (setq backup-directory-alist (quote ((".*" . "~/tmp/.emacs_backups/"))))
 (setq auto-fill-mode 1)
 
@@ -7,7 +7,7 @@
 (add-to-list 'load-path "~/elisp/emacs-jabber-0.8.90")
 (load "jabber-autoloads")
 (setq jabber-account-list
-  '(("lijiele@gmail.com" 
+  '(("lijiele@gmail.com"
      (:password . "abcdli1983")
      (:network-server . "talk.google.com")
      (:connection-type . ssl))))
@@ -102,7 +102,7 @@
 ;;(global-set-key "\C-xm" 'browse-url-at-point)
 
 (setq w3m-use-cookies t)
-(setq w3m-default-display-inline-images t) 
+(setq w3m-default-display-inline-images t)
 (setq w3m-command-arguments '("-cookie" "-F"))
 
 ;; load ibus-mode
@@ -148,7 +148,7 @@
 (defun create-tags (dir-name)
   "Create tags file."
   (interactive "DDirectory: ")
-  (eshell-command 
+  (eshell-command
    (format "find %s -type f -name \"*.*\" | xargs etags --append" dir-name)))
 
 ;;
@@ -157,3 +157,33 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
+
+;;ido mode
+(ido-mode t)
+
+
+;; below configration is taste about:
+;; https://github.com/rmm5t/dotfiles
+;;
+;; "y or n" instead of "yes or no"
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Trailing whitespace is unnecessary
+(add-hook 'before-save-hook (lambda () (delete-trailing-whitespace)))
+
+;; Map the window manipulation keys to meta 0, 1, 2, o
+(global-set-key (kbd "M-3") 'split-window-horizontally) ; was digit-argument
+(global-set-key (kbd "M-2") 'split-window-vertically) ; was digit-argument
+(global-set-key (kbd "M-1") 'delete-other-windows) ; was digit-argument
+(global-set-key (kbd "M-0") 'delete-window) ; was digit-argument
+(global-set-key (kbd "M-o") 'other-window) ; was facemenu-keymap
+;; Replace dired's M-o
+(add-hook 'dired-mode-hook (lambda () (define-key dired-mode-map (kbd "M-o") 'other-window))) ; was dired-omit-mode
+;; Replace ibuffer's M-o
+(add-hook 'ibuffer-mode-hook (lambda () (define-key ibuffer-mode-map (kbd "M-o") 'other-window))) ; was ibuffer-visit-buffer-1-window
+;; To help Unlearn C-x 0, 1, 2, o
+(global-unset-key (kbd "C-x 3")) ; was split-window-horizontally
+(global-unset-key (kbd "C-x 2")) ; was split-window-vertically
+(global-unset-key (kbd "C-x 1")) ; was delete-other-windows
+(global-unset-key (kbd "C-x 0")) ; was delete-window
+(global-unset-key (kbd "C-x o")) ; was other-window
