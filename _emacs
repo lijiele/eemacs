@@ -56,8 +56,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
 
- '(fringe-mode 0 nil (fringe))
- '(menu-bar-mode nil)
  '(scroll-bar-mode nil)
  '(tooltip-mode nil))
  '(menu-bar-mode nil)
@@ -91,8 +89,8 @@
 ;;             (php-completion-mode t)
 ;;             (define-key php-mode-map (kbd "C-o") 'phpcmp-complete)))
 
-(require 'blank-mode)
-(global-set-key "\C-c_b" 'blank-mode)
+;;(require 'blank-mode)
+;;(global-set-key "\C-c_b" 'blank-mode)
 
 
 (require 'w3m-load)
@@ -170,3 +168,6 @@
 
 ;; Trailing whitespace is unnecessary
 (add-hook 'before-save-hook (lambda () (delete-trailing-whitespace)))
+
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
