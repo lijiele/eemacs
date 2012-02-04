@@ -1,0 +1,83 @@
+(setq standard-indent 4)
+(setq-default indent-tabs-mode nil)
+(setq backup-directory-alist (quote ((".*" . "~/tmp/.emacs_backups/"))))
+(setq auto-fill-mode 1)
+
+(add-to-list 'load-path "~/elisp")
+
+(autoload 'php-mode "php-mode" "Major mode for editing php code." t)
+(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.t$" . php-mode))
+
+(require 'color-theme)
+(color-theme-initialize)
+(color-theme-charcoal-black)
+
+;;compile display color remove ^[[0m
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (toggle-read-only)
+  (ansi-color-apply-on-region (point-min) (point-max))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/elisp/ac-dict")
+(ac-config-default)
+
+;;disable the welcome page
+(setq inhibit-splash-screen t)
+
+(add-to-list 'load-path "~/elisp/magit-1.0.0")
+(require 'magit)
+(global-set-key "\C-xg" 'magit-status)
+
+;;config for paredit
+(autoload 'paredit-mode "paredit"
+  "Minor mode for pseudo-structurally editing Lisp code." t)
+(add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode +1)))
+(add-hook 'lisp-mode-hook             (lambda () (paredit-mode +1)))
+(add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode +1)))
+(add-hook 'scheme-mode-hook           (lambda () (paredit-mode +1)))
+
+;;ido mode
+(ido-mode t)
+
+;; below configration is taste about:
+;; https://github.com/rmm5t/dotfiles
+;;
+;; "y or n" instead of "yes or no"
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Trailing whitespace is unnecessary
+(add-hook 'before-save-hook (lambda () (delete-trailing-whitespace)))
+
+(require 'multi-term)
+(setq multi-term-program "/bin/bash")
+
+
+;;autopair
+(require 'autopair)
+(autopair-global-mode)
+
+;;hippie-expand
+(global-set-key [(meta ?/)] 'hippie-expand)
+(setq hippie-expand-try-functions-list
+      '(try-expand-dabbrev
+	try-expand-dabbrev-visible
+	try-expand-dabbrev-all-buffers
+	try-expand-dabbrev-from-kill
+	try-complete-file-name-partially
+	try-complete-file-name
+	try-expand-all-abbrevs
+	try-expand-list
+	try-expand-line
+	try-complete-lisp-symbol-partially
+	try-complete-lisp-symbol))
+
+(setq column-number-mode t)
+(setq default-fill-column 70)
+
+;;uniq
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
