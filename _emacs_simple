@@ -1,3 +1,4 @@
+;; -*-Lisp-*-
 (setq standard-indent 4)
 (setq-default indent-tabs-mode nil)
 (setq backup-directory-alist (quote ((".*" . "~/tmp/.emacs_backups/"))))
@@ -81,3 +82,5 @@
 ;;uniq
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
+
+(menu-bar-mode 0)
