@@ -84,4 +84,5 @@
 (setq uniquify-buffer-name-style 'forward)
 
 (menu-bar-mode 0)
-(put 'scroll-left 'disabled nil)
+
+(require 'nginx-mode)
