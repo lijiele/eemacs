@@ -84,3 +84,4 @@
 (setq uniquify-buffer-name-style 'forward)
 
 (menu-bar-mode 0)
+(require 'nginx-mode)
