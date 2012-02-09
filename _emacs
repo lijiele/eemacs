@@ -46,7 +46,7 @@
     ;;    (color-theme-hober))
     (color-theme-charcoal-black))
                                         ;(your-config-name)
-(set-face-attribute 'default nil :height 100)
+;;(set-face-attribute 'default nil :height 100)
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 
