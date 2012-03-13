@@ -329,3 +329,15 @@ occurence of CHAR."
 ;;uniq
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
+
+;;recent file
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
+
+(require 'nginx-mode)
+
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
