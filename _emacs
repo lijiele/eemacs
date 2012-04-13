@@ -19,10 +19,6 @@
 (add-to-list 'auto-mode-alist '("\\.t$" . php-mode))
 
 
-                                        ;(load "php-mode")
-                                        ;(add-to-list 'auto-mode-alist
-                                        ;           '("\\.php[34]?\\'\\|\\.phtml\\'" . php-mode))
-
 (defun toggle-fullscreen (&optional f)
   (interactive)
   (let ((current-value (frame-parameter nil 'fullscreen)))
@@ -173,8 +169,8 @@
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 
-(require 'multi-term)
-(setq multi-term-program "/bin/bash")
+;;(require 'multi-term)
+;;(setq multi-term-program "/bin/bash")
 
 (require 'org-latex)
 (setq org-export-latex-listings t)
@@ -195,55 +191,55 @@
 
 (require 'plantuml-mode)
 
-;;tabbar
-(require 'tabbar)
-(tabbar-mode)
-(global-set-key (quote [s-left]) (quote tabbar-backward))
-(global-set-key (quote [s-right]) (quote tabbar-forward))
-(global-set-key (quote [s-up]) (quote tabbar-backward-group))
-(global-set-key (quote [s-down]) (quote tabbar-forward-group))
-
-(setq tabbar-buffer-groups-function 'tabbar-buffer-ignore-groups)
-
-(defun tabbar-buffer-ignore-groups (buffer)
-  "Return the list of group names BUFFER belongs to.
-Return only one group for each buffer."
-  (with-current-buffer (get-buffer buffer)
-    (cond
-     ((or (get-buffer-process (current-buffer))
-          (memq major-mode
-                '(comint-mode compilation-mode)))
-      '("Process")
-      )
-     ((member (buffer-name)
-              '("*scratch*" "*Messages*"))
-      '("Common")
-      )
-     ((eq major-mode 'dired-mode)
-      '("Dired")
-      )
-     ((memq major-mode
-            '(help-mode apropos-mode Info-mode Man-mode))
-      '("Help")
-      )
-     ((memq major-mode
-            '(rmail-mode
-              rmail-edit-mode vm-summary-mode vm-mode mail-mode
-              mh-letter-mode mh-show-mode mh-folder-mode
-              gnus-summary-mode message-mode gnus-group-mode
-              gnus-article-mode score-mode gnus-browse-killed-mode))
-      '("Mail")
-      )
-     (t
-      (list
-       "default"  ;; no-grouping
-       (if (and (stringp mode-name) (string-match "[^ ]" mode-name))
-           mode-name
-         (symbol-name major-mode)))
-      )
-
-     )))
-
+;;;;tabbar
+;;(require 'tabbar)
+;;(tabbar-mode)
+;;(global-set-key (quote [s-left]) (quote tabbar-backward))
+;;(global-set-key (quote [s-right]) (quote tabbar-forward))
+;;(global-set-key (quote [s-up]) (quote tabbar-backward-group))
+;;(global-set-key (quote [s-down]) (quote tabbar-forward-group))
+;;
+;;(setq tabbar-buffer-groups-function 'tabbar-buffer-ignore-groups)
+;;
+;;(defun tabbar-buffer-ignore-groups (buffer)
+;;  "Return the list of group names BUFFER belongs to.
+;;Return only one group for each buffer."
+;;  (with-current-buffer (get-buffer buffer)
+;;    (cond
+;;     ((or (get-buffer-process (current-buffer))
+;;          (memq major-mode
+;;                '(comint-mode compilation-mode)))
+;;      '("Process")
+;;      )
+;;     ((member (buffer-name)
+;;              '("*scratch*" "*Messages*"))
+;;      '("Common")
+;;      )
+;;     ((eq major-mode 'dired-mode)
+;;      '("Dired")
+;;      )
+;;     ((memq major-mode
+;;            '(help-mode apropos-mode Info-mode Man-mode))
+;;      '("Help")
+;;      )
+;;     ((memq major-mode
+;;            '(rmail-mode
+;;              rmail-edit-mode vm-summary-mode vm-mode mail-mode
+;;              mh-letter-mode mh-show-mode mh-folder-mode
+;;              gnus-summary-mode message-mode gnus-group-mode
+;;              gnus-article-mode score-mode gnus-browse-killed-mode))
+;;      '("Mail")
+;;      )
+;;     (t
+;;      (list
+;;       "default"  ;; no-grouping
+;;       (if (and (stringp mode-name) (string-match "[^ ]" mode-name))
+;;           mode-name
+;;         (symbol-name major-mode)))
+;;      )
+;;
+;;     )))
+;;
 ;;hippie-expand
 (global-set-key [(meta ?/)] 'hippie-expand)
 (setq hippie-expand-try-functions-list
@@ -341,3 +337,9 @@ occurence of CHAR."
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
+
+(add-to-list 'load-path "~/git/helm")
+(require 'helm-config)
+(global-set-key (kbd "C-c h") 'helm-mini)
+(require 'elscreen)
+
