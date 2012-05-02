@@ -343,3 +343,40 @@ occurence of CHAR."
 (global-set-key (kbd "C-c h") 'helm-mini)
 (require 'elscreen)
 
+;;(add-to-list 'load-path "~/git/emms/lisp/")
+;;(require 'emms-setup)
+;;(emms-all)
+;;(emms-default-players)
+;;(setq emms-player-mplayer-command-name "mplayer"
+;;      emms-player-mplayer-parameters ‘("-slave")
+;;      emms-player-mpg321-command-name "mpg123"
+;;      emms-player-list
+;;      ‘(emms-player-mplayer
+;;        emms-player-mplayer-playlist
+;;        emms-player-mpg321
+;;        emms-player-ogg123))
+;;(defun ddliu-emms-player-mplayer-volume-up ()
+;;  "Depends on mplayer’s -slave mode."
+;;  (interactive)
+;;  (process-send-string
+;;   emms-player-simple-process-name "volume 1\n"))
+
+;;(require 'emms-player-mplayer)
+
+
+(define-skeleton org-beamer-skeleton
+  "Insert org beamer header"
+  ""
+  "#+startup: beamer
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [bigger]
+#+BEAMER_FRAME_LEVEL: 2
+#+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)")
+
+;;(add-to-list 'load-path "~/git/yasnippet")
+;;(require 'yasnippet) ;; not yasnippet-bundle
+;;(yas/initialize)
+;;(yas/load-directory "~/git/yasnippet/snippets")
+;;(setq org-s5-theme "railscast")
+(put 'narrow-to-region 'disabled nil)
+(put 'narrow-to-page 'disabled nil)
