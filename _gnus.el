@@ -18,8 +18,7 @@
 ;				  (nnimap-stream ssl)))
 
 (setq message-send-mail-function 'smtpmail-send-it
-;;      smtpmail-starttls-credentials '(("smtp.163.com" 25 "lijiele__dev@163.com" "abcdli1983"))
-      smtpmail-auth-credentials '(("smtp.163.com" 25 "lijiele__dev@163.com" "abcdli1983"))
+      smtpmail-auth-credentials '(("smtp.163.com" 25 "lijiele__dev@163.com"))
       smtpmail-default-smtp-server "smtp.163.com"
       smtpmail-smtp-server "smtp.163.com")
 

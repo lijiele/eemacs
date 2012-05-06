@@ -8,15 +8,14 @@
 (load "jabber-autoloads")
 (setq jabber-account-list
   '(("lijiele@gmail.com"
-     (:password . "abcdli1983")
      (:network-server . "talk.google.com")
      (:connection-type . ssl))))
 (setq jabber-roster-line-format "%c%n - %s")
 (setq jabber-chat-buffer-show-avatar nil)
 
-(autoload 'php-mode "php-mode" "Major mode for editing php code." t)
-(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
-(add-to-list 'auto-mode-alist '("\\.t$" . php-mode))
+;;;(autoload 'php-mode "php-mode" "Major mode for editing php code." t)
+;;;(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+;;;(add-to-list 'auto-mode-alist '("\\.t$" . php-mode))
 
 
 (defun toggle-fullscreen (&optional f)
@@ -109,18 +108,18 @@
 ;; Change cursor color depending on IBus status
 (setq ibus-cursor-color '("red" "blue" "limegreen"))
 ;; use C-; to toggle IBus
-(global-set-key [(control ?;)] 'ibus-toggle)
+(global-set-key [(control ?\;)] 'ibus-toggle)
 ;; Enable C-; key only for preediting
-(ibus-define-common-key [(control ?;)] nil)
-(ibus-define-preedit-key [(control ?;)] t)
+(ibus-define-common-key [(control ?\;)] nil)
+(ibus-define-preedit-key [(control ?\;)] t)
 
 
 ;;copy
 (setq x-select-enable-clipboard t)
 
 ;; disable the mouse-1
-(dolist (k '([mouse-1] [down-mouse-1] [drag-mouse-1]))
-  (global-unset-key k))
+;;(dolist (k '([mouse-1] [down-mouse-1] [drag-mouse-1]))
+;;  (global-unset-key k))
 
 
 ;;disable the welcome page
@@ -136,7 +135,7 @@
 (add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode +1)))
 (add-hook 'lisp-mode-hook             (lambda () (paredit-mode +1)))
 (add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode +1)))
-(add-hook 'scheme-mode-hook           (lambda () (paredit-mode +1)))
+
 
 ;;create tags
 (defun create-tags (dir-name)
@@ -186,10 +185,10 @@
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 (setq org-latex-to-pdf-process '("xelatex %f"))
 ;;autopair
-(require 'autopair)
-(autopair-global-mode)
+;;(require 'autopair)
+;;(autopair-global-mode)
 
-(require 'plantuml-mode)
+;;(require 'plantuml-mode)
 
 ;;;;tabbar
 ;;(require 'tabbar)
@@ -380,3 +379,41 @@ occurence of CHAR."
 ;;(setq org-s5-theme "railscast")
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
+
+;;--------------------
+(setq org-ditaa-jar-path "~/jar/ditaa0_9.jar")
+(setq org-plantuml-jar-path "~/jar/plantuml.jar")
+
+(add-hook 'org-babel-after-execute-hook 'bh/display-inline-images 'append)
+
+; Make babel results blocks lowercase
+(setq org-babel-results-keyword "results")
+
+(defun bh/display-inline-images ()
+  (condition-case nil
+      (org-display-inline-images)
+    (error nil)))
+
+(org-babel-do-load-languages
+ (quote org-babel-load-languages)
+ (quote ((emacs-lisp . t)
+         (dot . t)
+         (ditaa . t)
+         (R . t)
+         (python . t)
+         (ruby . t)
+         (gnuplot . t)
+         (clojure . t)
+         (sh . t)
+         (ledger . t)
+         (org . t)
+         (plantuml . t)
+         (latex . t))))
+
+; Do not prompt to confirm evaluation
+; This may be dangerous - make sure you understand the consequences
+; of setting this -- see the docstring for details
+(setq org-confirm-babel-evaluate nil)
+
+; Use fundamental mode when editing plantuml blocks with C-c '
+(add-to-list 'org-src-lang-modes (quote ("plantuml" . fundamental)))
